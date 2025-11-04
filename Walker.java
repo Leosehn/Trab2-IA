@@ -30,6 +30,11 @@ class Nodo{
 
 public class Walker {
 
+    // Cálculo de distância de Manhattan bem simples.
+    public static int manhattan(Nodo atual, Nodo objetivo){
+        return Math.abs(atual.x - objetivo.x) + Math.abs(atual.y - objetivo.y);
+    }
+
     // Único método por enquanto, vai servir para enviar a list principal para o walker.
     public static List<Nodo> leTxt(String caminhoTxt){
 
@@ -60,6 +65,37 @@ public class Walker {
             System.out.println("Erro na leitura do arquivo." + e.getMessage());
             return null;
         }
+
+    }
+
+    public static List<Nodo> getVizinhos(Nodo atual, List<Nodo> tabela, int dim){
+
+        List<Nodo> vizinhos = new ArrayList<>();
+        
+        //Lista de movimentos possíveis para o andador. Codificado para 0's e 1's.
+        int[][] movimentos = {
+            {1,0},  // Baixo
+            {-1,0}, // Cima
+            {0, 1}, // Direita
+            {0, -1} // Esquerda
+        };
+
+        for(int[] m : movimentos){
+            int nx = atual.x + m[0];
+            int ny = atual.x + m[0];
+
+            // Verifica se está dentro da tabela.
+            if(nx >= 0 && ny >= 0 && nx < dim && ny < dim){
+                Nodo n = tabela.get(nx * dim + ny);
+
+                // Vizinhos válidos são só aqueles de caminho livre ('E', '0' ou 'S')
+                if(!n.valor.equals("1")){
+                    vizinhos.add(n);
+                }
+            }
+        }
+
+        return vizinhos;
 
     }
 
