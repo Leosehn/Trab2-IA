@@ -16,7 +16,9 @@ class Nodo{
     // Sua "posição."
     int x, y;
 
-    int caminhoPercorrido, quantoFalta, custoTotal;
+    int g,      // Caminho percorrido.
+        h,      // Quanto falta.
+        f;      // Custo total, (g + h).
 
     // Nodo anterior do caminho.
     Nodo parente;
@@ -81,8 +83,8 @@ public class Walker {
         };
 
         for(int[] m : movimentos){
-            int nx = atual.x + m[0];
-            int ny = atual.x + m[0];
+            int nx = atual.x + m[1];
+            int ny = atual.x + m[1];
 
             // Verifica se está dentro da tabela.
             if(nx >= 0 && ny >= 0 && nx < dim && ny < dim){
@@ -99,13 +101,84 @@ public class Walker {
 
     }
 
+    // Passa pela tabela e econtra o 'caminho de menor resistência'
+    public static List<Nodo> aEstrela(List<Nodo> tabela, int dim){
+        ArrayList<Nodo> caminhoEncontrado = new ArrayList<Nodo>();
+
+        Nodo entrada = tabela.get(0);
+        Nodo saida = null;
+
+        System.out.println("Procurando por 'S'...");
+        for(Nodo n : tabela){
+            if(n.valor.equals("S")){
+                System.out.println("'S' encontrado! Continuando com A*...");
+                saida = n;
+                break;
+            }
+        }
+
+        if(saida == null){ throw new RuntimeException("Nenhum 'S' encontrado na tabela!"); };
+
+        // PriorityQueue baseando-se no 'custoTotal' de um nodo.
+        PriorityQueue<Nodo> openSet = new PriorityQueue<>(Comparator.comparingInt(n -> n.f));
+        HashSet<Nodo> closedSet = new HashSet<>();
+
+        // Ainda não caminho nada, portanto g = 0
+        entrada.g = 0;
+        // Estabelecendo distância inicial entre entrada e saída. Manhattan funciona bem por não termos movimentos diagonais.
+        entrada.h = manhattan(entrada, saida);
+        // Custo total (g+h)
+        entrada.f = entrada.h;
+
+        openSet.add(entrada);
+
+        while(!openSet.isEmpty()){
+            Nodo atual = openSet.poll();
+
+            if(atual.equals(saida)) {
+                while(atual != null){
+                    caminhoEncontrado.add(atual);
+                    atual = atual.parente;
+                }
+                Collections.reverse(caminhoEncontrado);
+                return caminhoEncontrado;
+            }
+
+            closedSet.add(atual);
+
+            for(Nodo viz : getVizinhos(atual, tabela, dim)){
+                if(closedSet.contains(viz)){ continue; }
+
+                int gScore = atual.g + 1;
+                boolean novoMelhor = false;
+
+                if(!openSet.contains(viz)){
+                    novoMelhor = true;
+                } else if(gScore < viz.g){
+                    novoMelhor = true;
+                }
+
+                if(novoMelhor){
+                    viz.parente = atual;
+                    viz.g = gScore;
+                    viz.h = manhattan(viz, saida);
+                    viz.f = viz.g + viz.h;
+                    openSet.add(viz);
+                }
+            }
+        }
+
+        // Nenhum caminho encontrado.
+        return null;
+
+    }
+
     //Simplesmente printando por enquanto a matriz que o 'leTxt' cria.
     public static void main(String[] args) {
         List<Nodo> tabela = leTxt("path.txt");
 
         // Por já sabemos que a tabela resultante vai ser NxN.
         int dim = (int) Math.sqrt(tabela.size()); 
-        System.out.println("Dimensões da tabela : " + dim + "x" + dim);
 
         if(tabela != null){
             for (int i = 0; i < tabela.size(); i++){
