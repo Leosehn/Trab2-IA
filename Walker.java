@@ -28,6 +28,21 @@ class Nodo{
         this.y = y;
         this.valor = valor;
     }
+
+    // Override do equals && hash para comparar nodos.
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        Nodo nodo = (Nodo) obj;
+        return x == nodo.x && y == nodo.y;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(x, y);
+    }
+
 }
 
 public class Walker {
@@ -83,8 +98,8 @@ public class Walker {
         };
 
         for(int[] m : movimentos){
-            int nx = atual.x + m[1];
-            int ny = atual.x + m[1];
+            int nx = atual.x + m[0];
+            int ny = atual.y + m[1];
 
             // Verifica se está dentro da tabela.
             if(nx >= 0 && ny >= 0 && nx < dim && ny < dim){
@@ -188,6 +203,16 @@ public class Walker {
                     System.out.println();
                 }
             }
+        }
+
+        List<Nodo> caminho = aEstrela(tabela, dim);
+        if(caminho != null){
+            System.out.println("Caminho encontrado:");
+            for(Nodo n : caminho){
+                System.out.println("Nodo em (" + n.x + ", " + n.y + ") com valor '" + n.valor + "'");
+            }
+        } else {
+            System.out.println("Nenhum caminho encontrado.");
         }
     }
 
