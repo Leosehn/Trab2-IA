@@ -156,7 +156,6 @@ public class Walker {
 
             if(atual.equals(saida)) {
                 while(atual != null){
-                    atual.valor = "$";
                     caminhoEncontrado.add(atual);
                     atual = atual.parente;
                 }
@@ -227,14 +226,22 @@ public class Walker {
 
     public static void imprimeCaminhoIdeal(List<Nodo> tabela, int dim, List<Nodo> caminho){
         if(tabela != null && caminho != null){
+            int ultimoVisitado = 0;
             for(int i = 0; i < tabela.size(); i++){
-                if(tabela.get(i).x == caminho.get(i).x && tabela.get(i).y == caminho.get(i).y) {
-                    System.out.println("$");
-                } else {
-                    System.out.print(tabela.get(i).valor);
+                if(i > 0){
+                    if(tabela.get(i).y > tabela.get(i-1).y){
+                        System.out.println();
+                    }
                 }
-                if(i + 1 % dim == 0 ){
-                    System.out.println();
+                if(ultimoVisitado < caminho.size()){
+
+                    if(tabela.get(i).x != caminho.get(ultimoVisitado).x && tabela.get(i).y != caminho.get(ultimoVisitado).y) {
+                        System.out.print(tabela.get(i).valor);
+                    } else {
+                        System.out.print("$");
+                        ultimoVisitado++;
+                    }
+
                 }
             }
         }
