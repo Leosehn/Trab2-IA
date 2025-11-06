@@ -208,7 +208,7 @@ public class Walker {
 
         if(tabela != null){
             for (int i = 0; i < tabela.size(); i++){
-                System.out.print(tabela.get(i).valor);
+                System.out.print(colorir(tabela.get(i).valor));
             
                 if((i + 1) % dim == 0){
                     System.out.println();
@@ -270,6 +270,7 @@ public class Walker {
             case "$" -> VERDE + valor + RESET;
             case "1" -> CINZA + valor + RESET;
             case "S" -> AZUL + valor + RESET;
+            case "E" -> AZUL + valor + RESET;
             default -> valor;
         };
     }
