@@ -193,9 +193,14 @@ public class Walker {
 
     }
 
-    //Simplesmente printando por enquanto a matriz que o 'leTxt' cria.
+
     public static void main(String[] args) {
-        List<Nodo> tabela = leTxt("path2.txt");
+        
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Por favor, especifique o caminho do arquivo txt:");
+
+        String path = teclado.nextLine();
+        List<Nodo> tabela = leTxt(path);
 
         // Por já sabemos que a tabela resultante vai ser NxN.
         int dim = (int) Math.sqrt(tabela.size()); 
