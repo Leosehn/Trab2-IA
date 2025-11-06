@@ -94,7 +94,11 @@ public class Walker {
             {1,0},  // Baixo
             {-1,0}, // Cima
             {0, 1}, // Direita
-            {0, -1} // Esquerda
+            {0, -1}, // Esquerda
+            {1, 1}, // Diagonal, direita pra baixo.
+            {-1, 1}, // Diagonal, direita pra cima
+            {1, -1}, // Diagonal, esquerda pra baixo.
+            {-1, -1} //Diagonal Esquerda para cima
         };
 
         for(int[] m : movimentos){
@@ -152,10 +156,12 @@ public class Walker {
 
             if(atual.equals(saida)) {
                 while(atual != null){
+                    atual.valor = "$";
                     caminhoEncontrado.add(atual);
                     atual = atual.parente;
                 }
                 Collections.reverse(caminhoEncontrado);
+
                 return caminhoEncontrado;
             }
 
@@ -190,7 +196,7 @@ public class Walker {
 
     //Simplesmente printando por enquanto a matriz que o 'leTxt' cria.
     public static void main(String[] args) {
-        List<Nodo> tabela = leTxt("path.txt");
+        List<Nodo> tabela = leTxt("path2.txt");
 
         // Por já sabemos que a tabela resultante vai ser NxN.
         int dim = (int) Math.sqrt(tabela.size()); 
@@ -214,6 +220,25 @@ public class Walker {
         } else {
             System.out.println("Nenhum caminho encontrado.");
         }
+
+        imprimeCaminhoIdeal(tabela, dim, caminho);
+
+    }
+
+    public static void imprimeCaminhoIdeal(List<Nodo> tabela, int dim, List<Nodo> caminho){
+        if(tabela != null && caminho != null){
+            for(int i = 0; i < tabela.size(); i++){
+                if(tabela.get(i).x == caminho.get(i).x && tabela.get(i).y == caminho.get(i).y) {
+                    System.out.println("$");
+                } else {
+                    System.out.print(tabela.get(i).valor);
+                }
+                if(i + 1 % dim == 0 ){
+                    System.out.println();
+                }
+            }
+        }
+
     }
 
 }
