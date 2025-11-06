@@ -195,12 +195,13 @@ public class Walker {
 
 
     public static void main(String[] args) {
-        
+
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor, especifique o caminho do arquivo txt:");
 
         String path = teclado.nextLine();
         List<Nodo> tabela = leTxt(path);
+        teclado.close();
 
         // Por já sabemos que a tabela resultante vai ser NxN.
         int dim = (int) Math.sqrt(tabela.size()); 
