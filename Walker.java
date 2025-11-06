@@ -225,27 +225,47 @@ public class Walker {
     }
 
     public static void imprimeCaminhoIdeal(List<Nodo> tabela, int dim, List<Nodo> caminho){
-        if(tabela != null && caminho != null){
-            int ultimoVisitado = 0;
-            for(int i = 0; i < tabela.size(); i++){
-                if(i > 0){
-                    if(tabela.get(i).y > tabela.get(i-1).y){
-                        System.out.println();
-                    }
-                }
-                if(ultimoVisitado < caminho.size()){
+        if (tabela == null || caminho == null) {
+            System.out.println("Nada para imprimir.");
+            return;
+        }
 
-                    if(tabela.get(i).x != caminho.get(ultimoVisitado).x && tabela.get(i).y != caminho.get(ultimoVisitado).y) {
-                        System.out.print(tabela.get(i).valor);
-                    } else {
-                        System.out.print("$");
-                        ultimoVisitado++;
-                    }
+        // Cria uma matriz NxN com os valores originais
+        String[][] matriz = new String[dim][dim];
+        for (Nodo n : tabela) {
+            matriz[n.x][n.y] = n.valor;
+        }
 
-                }
+        // Marca o caminho ideal com '$'
+        for (Nodo n : caminho) {
+            // Evita sobrescrever o 'S' final ou o ponto de entrada (opcional)
+            if (!n.valor.equals("S")) {
+                matriz[n.x][n.y] = "$";
             }
         }
 
+        // Imprime a matriz com o caminho
+        System.out.println("\nMapa com caminho ideal:");
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                System.out.print(colorir(matriz[i][j]));
+            }
+            System.out.println();
+        }
+    }
+    
+    public static String colorir(String valor){
+        final String RESET = "\u001B[0m";
+        final String VERDE = "\u001B[32m";
+        final String AZUL = "\u001B[34m";
+        final String CINZA = "\u001B[90m";
+
+        return switch (valor) {
+            case "$" -> VERDE + valor + RESET;
+            case "1" -> CINZA + valor + RESET;
+            case "S" -> AZUL + valor + RESET;
+            default -> valor;
+        };
     }
 
 }
