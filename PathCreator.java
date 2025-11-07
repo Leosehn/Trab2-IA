@@ -71,7 +71,7 @@ public class PathCreator {
         // Ironicamente, seguindo lógica parecida com o Walker.
         List<int[]> caminho = new ArrayList<>();
         boolean[][] visitado = new boolean[dim][dim];
-        int x = 0, y = 0;
+        int x = 1, y = 0;
         caminho.add(new int[]{x, y});
         visitado[x][y] = true;
 
