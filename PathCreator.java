@@ -103,5 +103,6 @@ public class PathCreator {
         System.out.print("Digite a dimensão do labirinto: ");
         int dim = teclado.nextInt();
         criaCaminhos(dim);
+        teclado.close();
     }
 }
