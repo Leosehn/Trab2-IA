@@ -2,7 +2,7 @@
 // Lê path.txt e tenta encontrar o seu caminho até o caracter 'S'.
 // [mvfm]
 
-// Criado : 04/11/2025  ||  Última vez alterado : 04/11/2025
+// Criado : 04/11/2025  ||  Última vez alterado : 06/11/2025
 
 import java.io.BufferedReader;
 import java.io.FileReader;
