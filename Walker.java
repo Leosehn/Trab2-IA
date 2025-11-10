@@ -9,42 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-class Nodo{
-    // Seu "valor", caracter que ele guarda.
-    String valor;
-
-    // Sua "posição."
-    int x, y;
-
-    int g,      // Caminho percorrido.
-        h,      // Quanto falta.
-        f;      // Custo total, (g + h).
-
-    // Nodo anterior do caminho.
-    Nodo parente;
-
-    Nodo(int x, int y, String valor){
-        this.x = x;
-        this.y = y;
-        this.valor = valor;
-    }
-
-    // Override do equals && hash para comparar nodos.
-    @Override
-    public boolean equals(Object obj){
-        if(this == obj) return true;
-        if(obj == null || getClass() != obj.getClass()) return false;
-        Nodo nodo = (Nodo) obj;
-        return x == nodo.x && y == nodo.y;
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(x, y);
-    }
-
-}
-
 public class Walker {
 
     // Cálculo de distância de Manhattan bem simples.

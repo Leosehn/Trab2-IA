@@ -76,7 +76,7 @@ public class PathCreator {
         visitado[x][y] = true;
 
         // Cria um caminho não tão grande.
-        int passos = rand.nextInt(dim * dim / 2) + dim;
+        int passos = rand.nextInt(dim^2 / 2) + dim;
 
         // Seguindo o limite de passos criado anteriormente, cuida para não se passar dos limites do labirinto & sobrescrever sobre posições já visitadas.
         for (int i = 0; i < passos; i++) {
