@@ -1,0 +1,67 @@
+========================================
+RESULTADOS DO SIMULATED ANNEALING
+========================================
+
+=== HISTÓRICO DE GERAÇÕES ===
+
+GERAÇÃO: 1
+SAÍDA ENCONTRADA
+(Cromossomo) 0 0 0 1 1 1 2 2 2 2 1 2 - Caminho: (0,0)-(0,1)-(1,1)-(2,2)-(2,2)-(1,2) - Aptidão: 9994.0
+
+
+========================================
+CAMINHO ENCONTRADO PELO SIMULATED ANNEALING
+========================================
+
+Tamanho do caminho: 5 passos
+Caminho completo (formato x y):
+0 0 0 1 1 1 2 2 1 2
+
+Caminho completo (formato coordenadas):
+(0,0)-(0,1)-(1,1)-(2,2)-(1,2)
+
+=== MAPA COM CAMINHO DO SA ===
+E $ 1 1 0 0 0 0 0 1
+1 $ S 0 0 1 0 1 0 0
+0 0 $ 0 1 1 0 0 1 1
+0 1 1 0 0 1 1 0 0 1
+0 0 0 0 0 1 1 0 1 1
+1 1 1 1 0 1 1 0 1 1
+1 0 1 1 0 1 1 0 0 0
+0 0 0 0 0 1 1 1 1 1
+1 0 1 0 0 0 0 0 1 1
+1 0 1 0 1 0 0 0 0 0
+
+========================================
+CAMINHO OTIMIZADO PELO A*
+========================================
+
+Tamanho do caminho: 3 passos
+Caminho completo (formato x y):
+0 0 1 1 1 2
+
+Caminho completo (formato coordenadas):
+(0,0)-(1,1)-(1,2)
+
+=== MAPA COM CAMINHO OTIMIZADO (A*) ===
+E 0 1 1 0 0 0 0 0 1
+1 * S 0 0 1 0 1 0 0
+0 0 0 0 1 1 0 0 1 1
+0 1 1 0 0 1 1 0 0 1
+0 0 0 0 0 1 1 0 1 1
+1 1 1 1 0 1 1 0 1 1
+1 0 1 1 0 1 1 0 0 0
+0 0 0 0 0 1 1 1 1 1
+1 0 1 0 0 0 0 0 1 1
+1 0 1 0 1 0 0 0 0 0
+
+========================================
+COMPARAÇÃO
+========================================
+Caminho SA: 5 passos
+Caminho A*: 3 passos
+Otimização: 2 passos reduzidos
+
+========================================
+Arquivo gerado com sucesso!
+========================================
