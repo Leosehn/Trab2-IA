@@ -32,9 +32,12 @@ public class Walker {
                 if(linha == null){
                     throw new RuntimeException("Arquivo tem menos linhas do que o esperado.");
                 }
-                for (int j = 0; j < dim; j++){
+                int index = 0;
+                for (int j = 0; j < linha.length(); j++){
+                    if (linha.charAt(j) == ' ') continue;
                     // Cria Nodo, o adiciona na lista mantendo sua posição & o caracter encontrado no arquivo txt.
-                    tabela.add(new Nodo(i, j, String.valueOf(linha.charAt(j))));
+                    tabela.add(new Nodo(i, index, String.valueOf(linha.charAt(j))));
+                    index++;
                 }
             }
 

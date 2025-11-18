@@ -100,7 +100,10 @@ public class Sa {
             } else {
                 iteracoesSemMelhora++;
             }
-            
+
+            registrarGeracao(melhorCaminho, null);
+
+
             temperatura *= taxaResfriamento;
         }
         
