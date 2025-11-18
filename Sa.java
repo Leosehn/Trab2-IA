@@ -75,6 +75,7 @@ public class Sa {
                     
                     // Registrar encontro da saída
                     registrarGeracao(caminhoAtual, "SAÍDA ENCONTRADA");
+                    melhorCaminho = new ArrayList<>(caminhoAtual);
                     break;
                 }
                 
@@ -88,9 +89,8 @@ public class Sa {
                         System.out.println("GERAÇÃO: " + geracaoAtual);
                         exibirMelhorCromossomoRapido(melhorCaminho, melhorCusto);
                         
-                        // Registrar esta geração
-                        registrarGeracao(melhorCaminho, null);
                     }
+                    registrarGeracao(melhorCaminho, null);
                     
                     // Modo detalhado: a cada 200 gerações
                     if (geracaoAtual % 200 == 0) {
@@ -100,8 +100,6 @@ public class Sa {
             } else {
                 iteracoesSemMelhora++;
             }
-
-            registrarGeracao(melhorCaminho, null);
 
 
             temperatura *= taxaResfriamento;
